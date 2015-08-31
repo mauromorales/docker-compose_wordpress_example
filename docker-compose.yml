@@ -1,0 +1,15 @@
+web:
+  build: ./wordpress
+  command: "/usr/sbin/apache2ctl -D FOREGROUND"
+  ports:
+    - "8000:8000"
+  links:
+    - db
+  # volumes:
+  #   - ./data:/code
+db:
+  build: "./mariadb"
+  environment:
+    DB_USER: dbuser
+    DB_PASS: szfNM3Im9cFJff1HDXKiCw==
+    DB_NAME: wordpress

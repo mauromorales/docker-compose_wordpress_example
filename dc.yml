@@ -1,0 +1,25 @@
+---
+db:
+  build: "./mariadb"
+  environment:
+    DB_USER: dbuser
+    DB_PASS: szfNM3Im9cFJff1HDXKiCw==
+registry:
+  build: "./docker-registry"
+  ports:
+  - 5000:5000
+  volumes:
+  - registry:/registry
+  links:
+  - web
+  environment: {}
+web:
+  build: "./rails"
+  ports:
+  - 3000:3000
+  links:
+  - db
+  command: "/usr/sbin/apache2ctl -D FOREGROUND"
+  environment:
+    DB_USER: dbuser
+    DB_PASS: szfNM3Im9cFJff1HDXKiCw==
